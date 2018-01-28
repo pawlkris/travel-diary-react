@@ -3,7 +3,7 @@
 ## Description
 Travel Diary is a React application built for Flatiron School's fourth module in four days. The project is a built out version of an earlier Vanilla JS single page application by the same name, and is currently an MVP version with additional features to be build out. The application is a diary to document the trips a user has been on. The app features:
 
-* Full CRUD functionality on a PostgreSQL Database, which is hosted on Heroku (https://travel-diary-backend.herokuapp.com... go to https://travel-diary-backend.herokuapp.com/api/trips to see json of all trips)
+* Full CRUD functionality through a Ruby on Rails API on a PostgreSQL Database, which is hosted on Heroku (https://travel-diary-backend.herokuapp.com... go to https://travel-diary-backend.herokuapp.com/api/trips to see json of all trips)
 * Route developed using React Router
 * Authorization and Authentication using bcrypt and jwt
 * Semantic used for CSS and HTML styling
