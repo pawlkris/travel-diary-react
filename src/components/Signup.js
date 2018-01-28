@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import api from '../services/api'
-import {withRouter} from 'react-router-dom';
 
 class Signup extends Component{
   state={

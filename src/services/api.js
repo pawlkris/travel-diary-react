@@ -1,4 +1,4 @@
-const API_ROOT = `http://localhost:3001/api`;
+const API_ROOT = `https://travel-diary-backend.herokuapp.com/api`;
 
 
 const token = localStorage.getItem('token')
