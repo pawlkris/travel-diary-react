@@ -9,11 +9,6 @@ const headers = {
   Authorization: token
 };
 
-const getTrips = () => {
-  return fetch(`${API_ROOT}/trips`)
-  .then(res => res.json())
-}
-
 const getUserTrips = (id) => {
   return fetch(`${API_ROOT}/users/${id}`)
   .then(res => res.json())
@@ -75,7 +70,6 @@ export default {
     getCurrentUser
   },
   trips: {
-    getTrips,
     getUserTrips,
     newTrip,
     deleteTrip,
