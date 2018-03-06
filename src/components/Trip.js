@@ -1,34 +1,44 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-const Trip = (props) => {
-  const {trip} = props;
+const Trip = props => {
+  const { trip } = props;
 
-  const formatDate = (date) => {
+  const formatDate = date => {
     date = new Date(date);
-    return `${date.getMonth()+1}/${date.getDate()+1}/${date.getFullYear()}`;
+    return `${date.getMonth() + 1}/${date.getDate() + 1}/${date.getFullYear()}`;
   };
 
   return (
-    <div style={{ opacity: ".9"}} className="trip ui centered card ">
-      <h3>{trip.name}</h3>
-      <p>Location: {trip.location.city}, {trip.location.state ? `${trip.location.state},` : ""} {trip.location.country}</p>
-      <p>Dates: {formatDate(trip.start_date)} - {formatDate(trip.end_date)}</p>
-      <div className="ui small buttons">
-            <Link
-              to={`/trips/${trip.id}`}
-              className="ui basic button black"
-            >
-              <i className="add circle icon" />
-              More Info
-            </Link>
-            <div onClick={() => props.handleDelete(trip.id)} className="ui inverted button red">
-              <i className="trash icon" />
-            </div>
+    <div className="trip ui centered card">
+      <div className="content">
+        <h3>{trip.name}</h3>
+        <p>
+          Location: {trip.location.city},{" "}
+          {trip.location.state ? `${trip.location.state},` : ""}{" "}
+          {trip.location.country}
+        </p>
+        <p>
+          Dates: {formatDate(trip.start_date)} - {formatDate(trip.end_date)}
+        </p>
+      </div>
+      <div className="extra content">
+        <div className="ui two buttons">
+          <Link to={`/trips/${trip.id}`} className="ui basic button black">
+            <i className="add circle icon" />
+            More Info
+          </Link>
+          <div
+            onClick={() => props.handleDelete(trip.id)}
+            className="ui inverted button red"
+          >
+            <i className="trash icon" />
+          </div>
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Trip;
 

@@ -1,68 +1,61 @@
 const API_ROOT = `https://travel-diary-backend.herokuapp.com/api`;
 
-
-const token = localStorage.getItem('token')
+const token = localStorage.getItem("token");
 
 const headers = {
-  "Content-Type": 'application/json',
-  Accepts: 'application/json',
+  "Content-Type": "application/json",
+  Accepts: "application/json",
   Authorization: token
 };
 
-const getUserTrips = (id) => {
-  return fetch(`${API_ROOT}/users/${id}`)
-  .then(res => res.json())
-}
+const getUserTrips = id => {
+  return fetch(`${API_ROOT}/users/${id}`).then(res => res.json());
+};
 
-const newTrip = (trip) => {
+const newTrip = trip => {
   return fetch(`${API_ROOT}/trips`, {
     method: "post",
     headers: headers,
     body: JSON.stringify(trip)
-  })
-  .then(res => res.json())
-}
+  }).then(res => res.json());
+};
 
-const deleteTrip = (id) => {
+const deleteTrip = id => {
   return fetch(`${API_ROOT}/trips/${id}`, {
     method: "delete",
     headers: headers
-  })
-}
+  });
+};
 
-const editTrip = (trip) => {
+const editTrip = trip => {
   return fetch(`${API_ROOT}/trips/${trip["id"]}`, {
     method: "PATCH",
-    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
     body: JSON.stringify(trip)
-  }).then(res => res.json())
-}
+  }).then(res => res.json());
+};
 
 const login = (username, password) => {
   return fetch(`${API_ROOT}/auth`, {
-    method: 'post',
+    method: "post",
     headers: headers,
-    body: JSON.stringify({username,password})
-  })
-  .then(res => res.json());
-}
-
+    body: JSON.stringify({ username, password })
+  }).then(res => res.json());
+};
 
 const getCurrentUser = () => {
   return fetch(`${API_ROOT}/current_user`, {
     headers: headers
-  })
-  .then(res => res.json());
-}
+  }).then(res => res.json());
+};
 
-const newUser = (user) => {
+const newUser = user => {
   return fetch(`${API_ROOT}/users`, {
     method: "post",
     headers: headers,
     body: JSON.stringify(user)
-  })
-  .then(res => res.json())
-}
+  }).then(res => res.json());
+};
 
 export default {
   auth: {
@@ -78,4 +71,4 @@ export default {
   users: {
     newUser
   }
-}
+};
