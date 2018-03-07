@@ -26,8 +26,8 @@ class TripContainer extends React.Component {
       description: "",
       sortBy: "newest"
     },
-    center: { lat: 40.475451, long: -101.299881 },
-    zoom: 5
+    center: { lat: 33.475451, long: -95.299881 },
+    zoom: 4
   };
 
   filterSubmit = (event, filters) => {
@@ -152,16 +152,18 @@ class TripContainer extends React.Component {
 
     let locationCount = trips => {
       locationCount = {};
-      trips.forEach(
-        trip =>
-          !locationCount[trip.location.city]
-            ? (locationCount[trip.location.city] = {
-                lat: trip.location.lat,
-                long: trip.location.long,
-                count: 0
-              })
-            : (locationCount[trip.location.city.count] += 1)
-      );
+      if (trips.length > 0) {
+        trips.forEach(
+          trip =>
+            !locationCount[trip.location.city]
+              ? (locationCount[trip.location.city] = {
+                  lat: trip.location.lat,
+                  long: trip.location.long,
+                  count: 1
+                })
+              : (locationCount[trip.location.city]["count"] += 1)
+        );
+      }
       return locationCount;
     };
 
