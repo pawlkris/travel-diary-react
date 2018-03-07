@@ -1,8 +1,3 @@
-body,
-html {
-  height: 100%;
-}
-
 .bg {
   /* The image used */
   position: fixed;
@@ -20,24 +15,22 @@ html {
 
 .filter {
   opacity: 0.9;
-  width: 40%;
-  display: inline-block;
+  width: 30%;
   clear: both;
+  margin: 10px;
 }
 
 .trip-container {
   height: 100%;
-  margin-bottom: 10%;
   overflow: auto;
+  margin-top: 1em;
 }
 
 .trip-list {
-  position: relative;
-  overflow: auto;
-  width: 60%;
-  height: 500px;
-  display: inline;
-  float: right;
+  width: 90%;
+  padding: 50px 0 100px 0;
+  /* display: inline;
+  float: right; */
 }
 
 .card {
@@ -46,4 +39,18 @@ html {
 
 .right {
   float: right;
+}
+
+.all-trips {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.trip-list-map {
+  width: 60%;
+  height: 500px;
+  top: 0;
+  right: 0;
+  margin: 10px;
 }

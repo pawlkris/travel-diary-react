@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://pawlkris.github.io/travel-diary-react",
   "dependencies": {
+    "google-map-react": "^0.32.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
@@ -19,5 +20,4 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   }
-
 }
