@@ -32,7 +32,7 @@ class TripContainer extends React.Component {
 
   filterSubmit = (event, filters) => {
     event.preventDefault();
-    this.setState({ filter: filters });
+    this.setState(prevState => ({ ...prevState, filter: filters }));
   };
 
   handleNewSubmit = (event, trip) => {
@@ -67,6 +67,41 @@ class TripContainer extends React.Component {
       .editTrip(trip)
       .then(json => this.props.history.push(`/trips/${json.id}`))
       .then(this.props.loadTrips);
+  };
+
+  handleMapMarkerClick = cityName => {
+    this.setState(prevState => ({
+      ...prevState,
+      filter: { ...prevState.filter, city: cityName }
+    }));
+  };
+
+  resetMapState = () => {
+    this.setState(prevState => ({
+      ...prevState,
+      center: { lat: 33.475451, long: -95.299881 },
+      zoom: 4
+    }));
+  };
+
+  resetFilterState = () => {
+    this.setState(prevState => ({
+      ...prevState,
+      filter: {
+        year: "",
+        month: "",
+        city: "",
+        state: "",
+        country: "",
+        work: false,
+        leisure: false,
+        beach: false,
+        family: false,
+        friends: false,
+        description: "",
+        sortBy: "newest"
+      }
+    }));
   };
 
   render() {
@@ -159,16 +194,15 @@ class TripContainer extends React.Component {
               ? (locationCount[trip.location.city] = {
                   lat: trip.location.lat,
                   long: trip.location.long,
-                  count: 1
+                  trips: [trip.name]
                 })
-              : (locationCount[trip.location.city]["count"] += 1)
+              : locationCount[trip.location.city]["trips"].push(trip.name)
         );
       }
       return locationCount;
     };
 
     let filteredLocationCount = locationCount(filteredTrips);
-
     return (
       <div className="trip-container ui container">
         <Switch>
@@ -212,11 +246,17 @@ class TripContainer extends React.Component {
             render={() => {
               return (
                 <div className="all-trips">
-                  <Filter handleSubmit={this.filterSubmit} />
+                  <Filter
+                    handleSubmit={this.filterSubmit}
+                    filter={this.state.filter}
+                    resetFilter={this.resetFilterState}
+                  />
                   <TripListMap
                     center={this.state.center}
                     zoom={this.state.zoom}
+                    handleClick={this.handleMapMarkerClick}
                     locations={filteredLocationCount}
+                    resetMap={this.resetMapState}
                   />
                   <TripList
                     trips={filteredTrips}

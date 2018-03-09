@@ -3,29 +3,48 @@ var shortid = require("shortid");
 
 class Filter extends React.Component {
   state = {
-    year: "",
-    month: "",
-    city: "",
-    state: "",
-    country: "",
-    work: false,
-    leisure: false,
-    beach: false,
-    family: false,
-    friends: false,
-    description: "",
-    sortBy: "newest"
+    year: this.props.filter.year,
+    month: this.props.filter.month,
+    city: this.props.filter.city,
+    state: this.props.filter.state,
+    country: this.props.filter.country,
+    work: this.props.filter.work,
+    leisure: this.props.filter.leisure,
+    beach: this.props.filter.beach,
+    family: this.props.filter.family,
+    friends: this.props.filter.friends,
+    description: this.props.filter.description,
+    sortBy: this.props.filter.sortBy
   };
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      year: nextProps.filter.year,
+      month: nextProps.filter.month,
+      city: nextProps.filter.city,
+      state: nextProps.filter.state,
+      country: nextProps.filter.country,
+      work: nextProps.filter.work,
+      leisure: nextProps.filter.leisure,
+      beach: nextProps.filter.beach,
+      family: nextProps.filter.family,
+      friends: nextProps.filter.friends,
+      description: nextProps.filter.description,
+      sortBy: nextProps.filter.sortBy
+    });
+  }
 
   handleChange = (event, attr) => {
     this.setState({ [attr]: event.target.value });
   };
 
   handleCheck = (event, attr) => {
-    this.setState({ [attr]: event.target.checked }, () =>
-      console.log(this.state[attr])
-    );
+    this.setState({ [attr]: event.target.checked });
   };
+
+  componentWillUnmount() {
+    this.props.resetFilter();
+  }
 
   render() {
     let year = new Date().getFullYear();
@@ -226,7 +245,13 @@ class Filter extends React.Component {
           </select>
         </div>
         <br />
-        <button className="ui button">Submit</button>
+        <button className="ui button default">Submit</button>
+        <button
+          onClick={this.props.resetFilter}
+          className="ui button inverted red"
+        >
+          Reset
+        </button>
       </form>
     );
   }
